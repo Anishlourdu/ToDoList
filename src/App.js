@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import "./App.css"
 
 function App() {
 
@@ -14,11 +15,8 @@ function App() {
     if (inputValue.trim() === '') {
       return;
     }
-    const newTodo = {
-      id: Date.now(),
-      text: inputValue,
-      completed: false,
-    }
+    const newTodo = { id: Date.now(), text: inputValue, completed: false, }
+
     setTodos([...todos, newTodo]);
     setInputValue('');
   }
@@ -43,19 +41,32 @@ function App() {
 
   return (
     <div>
-      <h1>ToDo List!!!</h1>
-      <input type="text" value={inputValue} onChange={handleChange} />
-      <button onClick={handleAdd}>Add List</button>
-
-      <ul>
-        {todos.map((todo) => (
-          <li key={todo.id}>
-            <input type="checkbox" checked={todo.completed} onChange={() => handleToggle(todo.id)} />
-            <span style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}>{todo.text}</span>
-            <button onClick={() => handleDelete(todo.id)}>Delete</button>
-          </li>
-        ))}
-      </ul>
+      <br /><br />
+      <div class="container">
+        <h2><marquee width="100%" behavior="scroll" bgcolor="e5e500">ToDo List using React . . .</marquee></h2>
+        <div class="row">
+          <div class="col">
+            <input class="form-control" type="text" value={inputValue} onChange={handleChange} placeholder="Please Enter Here . . ." />
+          </div>
+          <div class="col">
+            <button class="btn btn-primary mb-2" onClick={handleAdd}>Add List</button>
+          </div>
+        </div>
+        <div class="">
+          <ol>
+            {todos.map((todo) => (
+              <li key={todo.id}>
+                &emsp;
+                <input type="checkbox" checked={todo.completed} onChange={() => handleToggle(todo.id)} />
+                &emsp;
+                <span style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}>{todo.text}</span>
+                &emsp;
+                <button class="btn btn-danger" onClick={() => handleDelete(todo.id)}>Delete</button>
+                </li>
+            ))}
+          </ol>
+        </div>
+      </div>
     </div>
   )
 }
